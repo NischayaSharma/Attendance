@@ -1,0 +1,40 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<ul class="time">
+  <li>8-9</li>
+  <li>9-10</li>
+  <li>10-11</li>
+  <li>11-12</li>
+  <li>12-1</li>
+  <li>1-2</li>
+  <li>2-3</li>
+  <li>3-4</li>
+  <li>4-5</li>
+  <li>5-6</li>
+  </ul>
+
+  <ul class="days">
+    <li>Monday</li>
+    <li>Tuesday</li>
+    <li>Wednesday</li>
+    <li>Thursday</li>
+    <li>Friday</li>
+    <li>Saturday</li>
+
+    </ul>
+
+
+
+
+{% endblock %}
