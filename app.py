@@ -21,7 +21,7 @@ login_manager.init_app(app)
 login_manager.login_view='login'
 
 class User(UserMixin,db.Model):
-    sapId = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
@@ -85,10 +85,9 @@ def login():
         if user:
             if check_password_hash(user.password,form.password.data):
                 login_user(user, remember=form.remember.data)
-                user.counter+=1
-                if(user.counter==1):
-   
-                    return redirect(url_for('edit_profile'))
+                # user.counter+=1
+                # if(user.counter==1):
+                #     return redirect(url_for('edit_profile'))
                 return redirect(url_for('dashboard'))
         return '<h1>Invalid Pass</h1>'
     return render_template('login.html',form=form)
@@ -111,7 +110,7 @@ def signup():
     form=registerform()
     if form.validate_on_submit():
         hashed_password=generate_password_hash(form.password.data,method='sha256')
-        new_user=User(username=form.username.data,email=form.email.data,password=hashed_password,about_me="",time_table="",counter=0)
+        new_user=User(username=form.username.data,email=form.email.data,password=hashed_password,time_table="",counter=0)
         db.session.add(new_user)
         db.session.commit()
 
@@ -134,16 +133,16 @@ def logout():
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
-        db.session.commit()
-        return redirect(url_for('edit_profile'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile', form=form)
+    # form = EditProfileForm()
+    # if form.validate_on_submit():
+    #     current_user.username = form.username.data
+    #     current_user.about_me = form.about_me.data
+    #     db.session.commit()
+    #     return redirect(url_for('edit_profile'))
+    # elif request.method == 'GET':
+    #     form.username.data = current_user.username
+    #     form.about_me.data = current_user.about_me
+    return render_template('editprofile.html')
 
 
 if __name__ == "__main__":

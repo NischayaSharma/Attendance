@@ -1,8 +1,8 @@
-"""Adding Timetable table
+"""demo
 
-Revision ID: 9f43325c6f5b
+Revision ID: 1136d70860a5
 Revises: 
-Create Date: 2020-03-02 21:30:34.777127
+Create Date: 2020-03-02 22:19:41.121266
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9f43325c6f5b'
+revision = '1136d70860a5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,13 +29,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('time')
     )
     op.create_table('user',
-    sa.Column('sapId', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=15), nullable=True),
     sa.Column('email', sa.String(length=50), nullable=True),
     sa.Column('password', sa.String(length=80), nullable=True),
     sa.Column('time_table', sa.String(), nullable=True),
     sa.Column('counter', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('sapId'),
+    sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
