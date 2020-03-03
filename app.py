@@ -85,9 +85,11 @@ def login():
         if user:
             if check_password_hash(user.password,form.password.data):
                 login_user(user, remember=form.remember.data)
-                # user.counter+=1
-                # if(user.counter==1):
-                #     return redirect(url_for('edit_profile'))
+                user.counter = user.counter+1
+                db.session.commit()
+                print(user.counter)
+                if(user.counter==1):
+                    return redirect(url_for('edit_profile'))
                 return redirect(url_for('dashboard'))
         return '<h1>Invalid Pass</h1>'
     return render_template('login.html',form=form)
